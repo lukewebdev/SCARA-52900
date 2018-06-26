@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<robot name="scara_arm_pvc">
+  <material name="blue">
+    <color rgba="0 0 .8 .9"/>
+  </material>
+  <material name="pvc">
+    <color rgba=".8 .8 .8 .9"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 .9"/>
+  </material>
+  <material name="aluminum">
+    <color rgba=".144 .144 .144 .8"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size=".139 .195 .009"/>
+      </geometry>
+      <material name="pvc"/>
+    </visual>    
+  </link>
+
+  <link name="scapula">
+    <visual>
+      <geometry>
+        <box size=".155 .134 .320"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 -.065 .075"/>
+      <material name="pvc"/>
+    </visual>    
+  </link>
+
+  <joint name="waist" type="revolute">
+    <parent link="base_link"/>
+    <child link="scapula"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 .09"/>
+    <limit lower="0" upper="6" effort="1" velocity="1" />
+    <visual>
+      <material name="aluminum"/>
+    </visual>
+  </joint>
+
+
+  <link name="humerus"> 
+    <visual>
+      <geometry>
+        <box size=".255 .059 .056"/>
+      </geometry>
+      <origin rpy="0 0 1.57057" xyz="0 .110 0"/>
+      <material name="pvc"/>
+    </visual> 
+  </link>
+
+  <joint name="shoulder" type="prismatic">
+    <parent link="scapula"/>
+    <child link="humerus"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <limit lower="0" upper=".155" effort="1" velocity="1"/>
+  </joint>
+
+  <link name="forearm">
+    <visual>
+      <geometry>
+        <box size=".205 .06 .072"/>
+      </geometry>
+      <origin xyz="0 .100 0" rpy="0 0 1.57057" />
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <joint name="elbow" type="revolute">
+    <parent link="humerus"/>
+    <child link="forearm"/>
+    <limit lower="-2.44" upper="2.44" effort="1" velocity="1"/>
+    <origin xyz="0 .190 -.08" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+	<link name="hand">
+    <visual>
+      <geometry>
+        <box size=".129 .03 .009"/>
+      </geometry>
+      <material name="pvc"/>
+    </visual>
+	</link>
+
+
+
+
+
+  <joint name="wrist" type="continuous">
+    <parent link="forearm"/>
+    <child link="hand"/>
+    <origin xyz="52 0 27" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+</robot>
