@@ -12,6 +12,18 @@
   <material name="aluminum">
     <color rgba=".144 .144 .144 .8"/>
   </material>
+  <material name="white">
+      <color rgba="1 1 1 1"/>
+  </material>
+  <material name="red">
+      <color rgba="0.8 0 0 1"/>
+  </material>
+  <material name="green">
+      <color rgba="0 1 0 1"/>
+  </material>
+  <material name="yellow">
+      <color rgba="1 1 0 1"/>
+  </material>
 
   <link name="base_link">
     <visual>
@@ -76,27 +88,24 @@
     <parent link="humerus"/>
     <child link="forearm"/>
     <limit lower="-2.44" upper="2.44" effort="1" velocity="1"/>
-    <origin xyz="0 .190 -.08" rpy="0 0 0" />
+    <origin xyz="0 .190 -.065" rpy="0 0 0" />
     <axis xyz="0 0 1" />
   </joint>
 
 	<link name="hand">
     <visual>
       <geometry>
-        <box size=".129 .03 .009"/>
+        <box size=".03  .129 .009  "/>
       </geometry>
-      <material name="pvc"/>
+      <origin xyz="0 0 0 " rpy="1.57057 0 0"/>
+      <material name="red"/>
     </visual>
 	</link>
-
-
-
-
 
   <joint name="wrist" type="continuous">
     <parent link="forearm"/>
     <child link="hand"/>
-    <origin xyz="52 0 27" rpy="0 0 0" />
+    <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
     <axis xyz="0 1 0" />
   </joint>
 
