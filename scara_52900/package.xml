@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>scara_52900</name>
+  <version>0.0.0</version>
+  <description>The scara_52900 package</description>
+
+  <maintainer email="lukewebdev@gmail.co">Luke Meier</maintainer>
+
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
