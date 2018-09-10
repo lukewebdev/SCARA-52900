@@ -41,7 +41,7 @@
       </geometry>
     </collision>   
     <inertial>
-    	<mass value="2" />
+    	<mass value="4" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
   	</inertial>
   </link>
