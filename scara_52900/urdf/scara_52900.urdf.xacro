@@ -37,7 +37,10 @@
         <box size=".139 .195 .009"/>
       </geometry>
     </collision>   
+    <inertial>
+    	<mass value="2" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+  	</inertial>
   </link>
 
   <link name="scapula">
@@ -52,8 +55,11 @@
       <geometry>
         <box size=".155 .134 .320"/>
       </geometry>
-    </collision>   
+    </collision>
+    <inertial>   
+    		<mass value="2" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
+  	</inertial>
   </link>
 
   <joint name="waist" type="revolute">
@@ -81,8 +87,11 @@
       <geometry>
         <box size=".255 .059 .056"/>
       </geometry>
-    </collision>   
+    </collision>
+    <inertial>   
+    		<mass value="2" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
+  </inertial>
   </link>
 
   <joint name="shoulder" type="prismatic">
@@ -106,8 +115,11 @@
       <geometry>
         <box size=".205 .06 .072"/>
       </geometry>
-    </collision>  
+    </collision> 
+    <inertial> 
+    		<mass value="2" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
+  </inertial>
   </link>
 
   <joint name="elbow" type="revolute">
@@ -132,7 +144,10 @@
         <box size=".03  .129 .009"/>
       </geometry>
     </collision> 
+    <inertial>
+    		<mass value="2" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
+	</inertial>
 	</link>
 
   <joint name="wrist" type="continuous">
