@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scara_52900">
+  <xacro:property name="damping_value" value="1" />
+  <xacro:property name="friction_value" value="1" />
+  <xacro:property name="mass_upper_links" value=".2" />
   <material name="blue">
     <color rgba="0 0 .8 .9"/>
   </material>
@@ -57,7 +60,7 @@
       </geometry>
     </collision>
     <inertial>   
-    		<mass value="2" />
+    		<mass value="${mass_upper_links}" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
   	</inertial>
   </link>
@@ -71,7 +74,7 @@
     <visual>
       <material name="aluminum"/>
     </visual>
-    <dynamics damping="0.0" friction="0.0" />
+    <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 
 
@@ -89,7 +92,7 @@
       </geometry>
     </collision>
     <inertial>   
-    		<mass value="2" />
+    		<mass value="${mass_upper_links}" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
   </inertial>
   </link>
@@ -100,7 +103,7 @@
     <axis xyz="0 0 1" />
     <origin xyz="0 0 .04" rpy="0 0 0" />
     <limit lower="0" upper=".155" effort="1" velocity="1"/>
-    <dynamics damping="0.0" friction="0.0" />
+    <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 
   <link name="forearm">
@@ -117,7 +120,7 @@
       </geometry>
     </collision> 
     <inertial> 
-    		<mass value="2" />
+    		<mass value="${mass_upper_links}" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
   </inertial>
   </link>
@@ -128,7 +131,7 @@
     <limit lower="-2.44" upper="2.44" effort="1" velocity="1"/>
     <origin xyz="0 .190 -.065" rpy="0 0 0" />
     <axis xyz="0 0 1" />
-    <dynamics damping="0.0" friction="0.0" />
+    <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 
 	<link name="hand">
@@ -145,7 +148,7 @@
       </geometry>
     </collision> 
     <inertial>
-    		<mass value="2" />
+    		<mass value="${mass_upper_links}" />
     <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
 	</inertial>
 	</link>
@@ -155,6 +158,6 @@
     <child link="hand"/>
     <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
     <axis xyz="0 1 0" />
-    <dynamics damping="0.0" friction="0.0" />
+    <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 </robot> 	
