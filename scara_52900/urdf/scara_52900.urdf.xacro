@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scara_52900">
-  <xacro:property name="damping_value" value="1" />
-  <xacro:property name="friction_value" value="1" />
+  <xacro:property name="damping_value" value=".1" />
+  <xacro:property name="friction_value" value=".1" />
   <xacro:property name="mass_upper_links" value=".2" />
   <material name="blue">
     <color rgba="0 0 .8 .9"/>
@@ -70,13 +70,25 @@
     <child link="scapula"/>
     <axis xyz="0 0 1" />
     <origin xyz="0 0 .09"/>
-    <limit lower="-3" upper="3" effort="1" velocity="1" />
+    <limit lower="-3" upper="3" effort="5" velocity="1" />
     <visual>
       <material name="aluminum"/>
     </visual>
     <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 
+
+ <!-- This block connects the wait joint to an actuator (motor), which informs both
+  simulation and visualization of the robot -->
+  <transmission name="waist_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$waist_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="waist">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
 
   <link name="humerus"> 
     <visual>
@@ -160,4 +172,11 @@
     <axis xyz="0 1 0" />
     <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
+
+    <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
 </robot> 	
