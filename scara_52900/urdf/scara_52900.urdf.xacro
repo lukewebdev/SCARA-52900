@@ -1,182 +1,175 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scara_52900">
-  <xacro:property name="damping_value" value=".1" />
-  <xacro:property name="friction_value" value=".1" />
-  <xacro:property name="mass_upper_links" value=".2" />
-  <material name="blue">
-    <color rgba="0 0 .8 .9"/>
-  </material>
-  <material name="pvc">
-    <color rgba=".8 .8 .8 1"/>
-  </material>
-  <material name="black">
-    <color rgba="0 0 0 1"/>
-  </material>
-  <material name="aluminum">
-    <color rgba=".144 .144 .144 .8"/>
-  </material>
-  <material name="white">
-      <color rgba="1 1 1 1"/>
-  </material>
-  <material name="red">
-      <color rgba="0.8 0 0 1"/>
-  </material>
-  <material name="green">
-      <color rgba="0 1 0 1"/>
-  </material>
-  <material name="yellow">
-      <color rgba="1 1 0 1"/>
-  </material>
+   <xacro:property name="damping_value" value=".1" />
+   <xacro:property name="friction_value" value=".1" />
+   <xacro:property name="mass_upper_links" value=".2" />
+   <material name="blue">
+      <color rgba="0 0 .8 .9" />
+   </material>
+   <material name="pvc">
+      <color rgba=".8 .8 .8 1" />
+   </material>
+   <material name="black">
+      <color rgba="0 0 0 1" />
+   </material>
+   <material name="aluminum">
+      <color rgba=".144 .144 .144 .8" />
+   </material>
+   <material name="white">
+      <color rgba="1 1 1 1" />
+   </material>
+   <material name="red">
+      <color rgba="0.8 0 0 1" />
+   </material>
+   <material name="green">
+      <color rgba="0 1 0 1" />
+   </material>
+   <material name="yellow">
+      <color rgba="1 1 0 1" />
+   </material>
+   <link name="world" />
+   <link name="base_link">
+      <visual>
+         <geometry>
+            <box size=".139 .195 .009" />
+         </geometry>
+         <material name="pvc" />
+      </visual>
+      <collision>
+         <geometry>
+            <box size=".139 .195 .009" />
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="4" />
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2" />
+      </inertial>
+   </link>
+   <joint name="world_joint" type="fixed">
+      <parent link="world" />
+      <child link="base_link" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+   </joint>   
+   <link name="scapula">
+      <visual>
+         <geometry>
+            <box size=".155 .134 .320" />
+         </geometry>
+         <origin rpy="0 0 0" xyz="0 -.065 .075" />
+         <material name="pvc" />
+      </visual>
+      <collision>
+         <geometry>
+            <box size=".155 .134 .320" />
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="${mass_upper_links}" />
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2" />
+      </inertial>
+   </link>
+   <joint name="waist" type="revolute">
+      <parent link="base_link" />
+      <child link="scapula" />
+      <axis xyz="0 0 1" />
+      <origin xyz="0 0 0.09"/>
+      <limit lower="-3" upper="3" effort="2" velocity="3" />
+      <visual>
+         <material name="aluminum" />
+      </visual>
+      <dynamics damping="${damping_value}" friction="${friction_value}" />
+   </joint>
+   <transmission name="waist_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="waist_motor">
+         <mechanicalReduction>20</mechanicalReduction>
+      </actuator>
+      <joint name="waist">
+         <hardwareInterface>PositionJointInterface</hardwareInterface>
+      </joint>
+   </transmission>
+   <link name="humerus">
+      <visual>
+         <geometry>
+            <box size=".255 .059 .056" />
+         </geometry>
+         <origin rpy="0 0 1.57057" xyz="0 .110 0" />
+         <material name="pvc" />
+      </visual>
+      <collision>
+         <geometry>
+            <box size=".255 .059 .056" />
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="${mass_upper_links}" />
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2" />
+      </inertial>
+   </link>
+   <joint name="shoulder" type="prismatic">
+      <parent link="scapula" />
+      <child link="humerus" />
+      <axis xyz="0 0 1" />
+      <origin xyz="0 0 .04" rpy="0 0 0" />
+      <limit lower="0" upper=".155" effort="1" velocity="1" />
+      <dynamics damping="${damping_value}" friction="${friction_value}" />
+   </joint>
+   <link name="forearm">
+      <visual>
+         <geometry>
+            <box size=".205 .06 .072" />
+         </geometry>
+         <origin xyz="0 .100 0" rpy="0 0 1.57057" />
+         <material name="blue" />
+      </visual>
+      <collision>
+         <geometry>
+            <box size=".205 .06 .072" />
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="${mass_upper_links}" />
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2" />
+      </inertial>
+   </link>
+   <joint name="elbow" type="revolute">
+      <parent link="humerus" />
+      <child link="forearm" />
+      <limit lower="-2.44" upper="2.44" effort="1" velocity="1" />
+      <origin xyz="0 .190 -.065" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+      <dynamics damping="${damping_value}" friction="${friction_value}" />
+   </joint>
+   <link name="hand">
+      <visual>
+         <geometry>
+            <box size=".03  .129 .009" />
+         </geometry>
+         <origin xyz="0 0 0 " rpy="1.57057 0 0" />
+         <material name="red" />
+      </visual>
+      <collision>
+         <geometry>
+            <box size=".03  .129 .009" />
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="${mass_upper_links}" />
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2" />
+      </inertial>
+   </link>
+   <joint name="wrist" type="continuous">
+      <parent link="forearm" />
+      <child link="hand" />
+      <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
+      <axis xyz="0 1 0" />
+      <dynamics damping="${damping_value}" friction="${friction_value}" />
+   </joint>
+   <!-- Gazebo plugin for ROS Control -->
+   <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+         <robotNamespace>/scara_52900</robotNamespace>
+      </plugin>
+   </gazebo>
+</robot>
 
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <box size=".139 .195 .009"/>
-      </geometry>
-      <material name="pvc"/>
-    </visual> 
-    <collision>
-      <geometry>
-        <box size=".139 .195 .009"/>
-      </geometry>
-    </collision>   
-    <inertial>
-    	<mass value="4" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
-  	</inertial>
-  </link>
-
-  <link name="scapula">
-    <visual>
-      <geometry>
-        <box size=".155 .134 .320"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 -.065 .075"/>
-      <material name="pvc"/>
-    </visual>  
-    <collision>
-      <geometry>
-        <box size=".155 .134 .320"/>
-      </geometry>
-    </collision>
-    <inertial>   
-    		<mass value="${mass_upper_links}" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
-  	</inertial>
-  </link>
-
-  <joint name="waist" type="revolute">
-    <parent link="base_link"/>
-    <child link="scapula"/>
-    <axis xyz="0 0 1" />
-    <origin xyz="0 0 .09"/>
-    <limit lower="-3" upper="3" effort="5" velocity="1" />
-    <visual>
-      <material name="aluminum"/>
-    </visual>
-    <dynamics damping="${damping_value}" friction="${friction_value}" />
-  </joint>
-
-
- <!-- This block connects the wait joint to an actuator (motor), which informs both
-  simulation and visualization of the robot -->
-  <transmission name="waist_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="$waist_motor">
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-    <joint name="waist">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>
-  </transmission>
-
-  <link name="humerus"> 
-    <visual>
-      <geometry>
-        <box size=".255 .059 .056"/>
-      </geometry>
-      <origin rpy="0 0 1.57057" xyz="0 .110 0"/>
-      <material name="pvc"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size=".255 .059 .056"/>
-      </geometry>
-    </collision>
-    <inertial>   
-    		<mass value="${mass_upper_links}" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
-  </inertial>
-  </link>
-
-  <joint name="shoulder" type="prismatic">
-    <parent link="scapula"/>
-    <child link="humerus"/>
-    <axis xyz="0 0 1" />
-    <origin xyz="0 0 .04" rpy="0 0 0" />
-    <limit lower="0" upper=".155" effort="1" velocity="1"/>
-    <dynamics damping="${damping_value}" friction="${friction_value}" />
-  </joint>
-
-  <link name="forearm">
-    <visual>
-      <geometry>
-        <box size=".205 .06 .072"/>
-      </geometry>
-      <origin xyz="0 .100 0" rpy="0 0 1.57057" />
-      <material name="blue"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size=".205 .06 .072"/>
-      </geometry>
-    </collision> 
-    <inertial> 
-    		<mass value="${mass_upper_links}" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
-  </inertial>
-  </link>
-
-  <joint name="elbow" type="revolute">
-    <parent link="humerus"/>
-    <child link="forearm"/>
-    <limit lower="-2.44" upper="2.44" effort="1" velocity="1"/>
-    <origin xyz="0 .190 -.065" rpy="0 0 0" />
-    <axis xyz="0 0 1" />
-    <dynamics damping="${damping_value}" friction="${friction_value}" />
-  </joint>
-
-	<link name="hand">
-    <visual>
-      <geometry>
-        <box size=".03  .129 .009"/>
-      </geometry>
-      <origin xyz="0 0 0 " rpy="1.57057 0 0"/>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size=".03  .129 .009"/>
-      </geometry>
-    </collision> 
-    <inertial>
-    		<mass value="${mass_upper_links}" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>  
-	</inertial>
-	</link>
-
-  <joint name="wrist" type="continuous">
-    <parent link="forearm"/>
-    <child link="hand"/>
-    <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
-    <axis xyz="0 1 0" />
-    <dynamics damping="${damping_value}" friction="${friction_value}" />
-  </joint>
-
-    <!-- Gazebo plugin for ROS Control -->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-  </gazebo>
-</robot> 	
