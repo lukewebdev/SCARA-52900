@@ -4,6 +4,6 @@ Test its joints:  roslaunch urdf_tutorial display.launch model:=urdf/scara_52900
 
 Gazebo test (not working): cd into src/scara_52900
 
-roslaunch scara_52900 gazebo.launch
+roslaunch scara_52900 joints.launch
 
 currently SCARA arm shows up on its side in Gazebo.
