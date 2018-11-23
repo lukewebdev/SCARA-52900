@@ -7,7 +7,9 @@ Gazebo test (not working): cd into src/scara_52900
 
 
 start gazebo client in another terminal after sourcing . ~/catkin_ws/devel/setup.bash
+
 rosrun gazebo_ros gzclient
+
 roslaunch scara_52900 gazebo.launch
 
 currently SCARA arm shows up on its side in Gazebo.
