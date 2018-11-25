@@ -17,8 +17,23 @@
             file="$(find scara_52900)/config/waist.yaml"
             ns="scara_52900_waist_controller" />
 
+  <rosparam command="load"
+            file="$(find scara_52900)/config/shoulder.yaml"
+            ns="scara_52900_shoulder_controller" />
+
+  <rosparam command="load"
+            file="$(find scara_52900)/config/elbow.yaml"
+            ns="scara_52900_elbow_controller" />
+
+  <rosparam command="load"
+            file="$(find scara_52900)/config/wrist.yaml"
+            ns="scara_52900_wrist_controller" />
+
   <node name="scara_52900_controller_spawner" pkg="controller_manager" type="spawner"
     args="scara_52900_joint_state_controller
           scara_52900_waist_controller
+          scara_52900_shoulder_controller
+          scara_52900_elbow_controller
+          scara_52900_wrist_controller
           --shutdown-timeout 3"/>
 </launch>

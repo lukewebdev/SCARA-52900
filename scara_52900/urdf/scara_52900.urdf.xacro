@@ -112,7 +112,7 @@
     <child link="humerus"/>
     <axis xyz="0 0 1" />
     <origin xyz="0 0 .04" rpy="0 0 0" />
-    <limit lower="0" upper=".155" effort="1" velocity="1"/>
+    <limit lower="0" upper=".155" effort="30" velocity="1"/>
     <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
 
@@ -149,7 +149,7 @@
   <joint name="elbow" type="revolute">
     <parent link="humerus"/>
     <child link="forearm"/>
-    <limit lower="-2.44" upper="2.44" effort="1" velocity="1"/>
+    <limit lower="-2.44" upper="2.44" effort="30" velocity="1"/>
     <origin xyz="0 .190 -.065" rpy="0 0 0" />
     <axis xyz="0 0 1" />
     <dynamics damping="${damping_value}" friction="${friction_value}" />
@@ -190,6 +190,7 @@
     <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
     <axis xyz="0 1 0" />
     <dynamics damping="${damping_value}" friction="${friction_value}" />
+    <limit effort="30" velocity="1" />
   </joint>
 
 

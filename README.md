@@ -8,6 +8,6 @@ cd into src/scara_52900
 
 start gazebo client in another terminal after sourcing . ~/catkin_ws/devel/setup.bash
 
-roslaunch scara_52900 waist.launch
+roslaunch scara_52900 all.launch
 
-to move waist joint, try rostopic pub /scara_52900_waist_controller/command std_msgs/Float64 "data: -2.107" with different data values.
+to move various joint, try rostopic pub /scara_52900_waist_controller/command std_msgs/Float64 "data: -2.107" with different data values. Sub "waist" for "elbow" "shoulder" "wrist" to move different joints.
