@@ -51,7 +51,7 @@
       <geometry>
         <box size=".155 .134 .320"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 -.065 .075"/>
+      <origin rpy="0 0 0" xyz="0 0 .075"/>
       <material name="pvc"/>
     </visual>  
     <collision>
