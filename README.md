@@ -2,7 +2,7 @@
 Work-in-progress for integrating aliexpress chinese pvc SCARA Robotic Arm Model 52900 with ROS. 
 Test its joints:  roslaunch urdf_tutorial display.launch model:=urdf/scara_52900.urdf.xacro
 
-Gazebo test (some joints not working tet): 
+Gazebo test: 
 
 cd into src/scara_52900
 
