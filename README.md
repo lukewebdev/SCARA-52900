@@ -1,4 +1,9 @@
 # SCARA-52900
+
+Checkout like this: 
+
+git clone https://github.com/lukewebdev/SCARA-52900.git scara_52900
+
 Work-in-progress for integrating aliexpress chinese pvc SCARA Robotic Arm Model 52900 with ROS. 
 Test its joints:  roslaunch urdf_tutorial display.launch model:=urdf/scara_52900.urdf.xacro
 
