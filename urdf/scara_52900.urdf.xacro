@@ -28,12 +28,15 @@
       <color rgba="1 1 0 1"/>
   </material>
 
+
+
   <link name="base_link">
     <visual>
       <geometry>
         <box size=".139 .195 .009"/>
       </geometry>
       <material name="pvc"/>
+      <origin rpy="0 0 0" xyz="0 0 0" />
     </visual> 
     <collision>
       <geometry>
@@ -42,9 +45,20 @@
     </collision>   
     <inertial>
     	<mass value="4" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+      <origin xyz="0 0 0" rpy="0 0 0" />
   	</inertial>
   </link>
+
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0"/>
+  </joint>
 
   <link name="scapula">
     <visual>
@@ -91,9 +105,9 @@
   <link name="humerus"> 
     <visual>
       <geometry>
-        <box size=".255 .059 .056"/>
+        <box size=".200 .059 .056"/>
       </geometry>
-      <origin rpy="0 0 1.57057" xyz="0 .110 0"/>
+      <origin rpy="0 0 1.57057" xyz="0 .100 0"/>
       <material name="pvc"/>
     </visual>
     <collision>
@@ -130,27 +144,27 @@
   <link name="forearm">
     <visual>
       <geometry>
-        <box size=".205 .06 .072"/>
+        <box size=".150 .06 .072"/>
       </geometry>
-      <origin xyz="0 .100 0" rpy="0 0 1.57057" />
+      <origin xyz="0 .0750 0" rpy="0 0 1.57057" />
       <material name="blue"/>
     </visual>
     <collision>
       <geometry>
-        <box size=".205 .06 .072"/>
+        <box size=".150 .06 .072"/>
       </geometry>
     </collision> 
     <inertial> 
-    		<mass value="${mass_upper_links}" />
-    <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
-  </inertial>
+    	<mass value="${mass_upper_links}" />
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/> 
+    </inertial>
   </link>
 
   <joint name="elbow" type="revolute">
     <parent link="humerus"/>
     <child link="forearm"/>
     <limit lower="-2.44" upper="2.44" effort="30" velocity="1"/>
-    <origin xyz="0 .190 -.065" rpy="0 0 0" />
+    <origin xyz="0 .200 -.065" rpy="0 0 0" />
     <axis xyz="0 0 1" />
     <dynamics damping="${damping_value}" friction="${friction_value}" />
   </joint>
@@ -187,7 +201,7 @@
   <joint name="wrist" type="continuous">
     <parent link="forearm"/>
     <child link="hand"/>
-    <origin xyz="0 .1993 -.05" rpy="1.57057 0  0 " />
+    <origin xyz="0 .150 -.05" rpy="1.57057 0  0 " />
     <axis xyz="0 1 0" />
     <dynamics damping="${damping_value}" friction="${friction_value}" />
     <limit effort="30" velocity="1" />
@@ -208,5 +222,10 @@
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
     </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+      <static>true</static>
+      <turnGravityOff>false</turnGravityOff>
   </gazebo>
 </robot> 	
