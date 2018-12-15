@@ -28,7 +28,10 @@
       <color rgba="1 1 0 1"/>
   </material>
 
-
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world">
+      <origin xyz="0 0 0"/>
+  </link>
 
   <link name="base_link">
     <visual>
@@ -45,14 +48,10 @@
     </collision>   
     <inertial>
     	<mass value="4" />
-      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+         <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
       <origin xyz="0 0 0" rpy="0 0 0" />
   	</inertial>
   </link>
-
-
-  <!-- Used for fixing robot to Gazebo 'base_link' -->
-  <link name="world"/>
 
   <joint name="fixed" type="fixed">
     <parent link="world"/>

@@ -36,4 +36,6 @@
           scara_52900_elbow_controller
           scara_52900_wrist_controller
           --shutdown-timeout 3"/>
+
+
 </launch>
