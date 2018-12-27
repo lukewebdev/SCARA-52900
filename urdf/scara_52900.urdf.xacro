@@ -56,7 +56,7 @@
   <joint name="fixed" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0"/>
+    <origin xyz="0 0 -.93"/>
   </joint>
 
   <link name="scapula">
@@ -96,7 +96,7 @@
       <mechanicalReduction>20</mechanicalReduction>
     </actuator>
     <joint name="waist">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
   </transmission>  
 
@@ -135,7 +135,7 @@
       <mechanicalReduction>5</mechanicalReduction>
     </actuator>
     <joint name="shoulder">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
   </transmission> 
 
@@ -174,7 +174,7 @@
       <mechanicalReduction>12</mechanicalReduction>
     </actuator>
     <joint name="elbow">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
   </transmission>   
 
@@ -213,7 +213,7 @@
       <mechanicalReduction>4</mechanicalReduction>
     </actuator>
     <joint name="wrist">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
   </transmission>   
 
@@ -227,4 +227,4 @@
       <static>true</static>
       <turnGravityOff>false</turnGravityOff>
   </gazebo>
-</robot> 	
+</robot>

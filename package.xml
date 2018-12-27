@@ -11,7 +11,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-
+  <build_depend>rosserial_arduino</build_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

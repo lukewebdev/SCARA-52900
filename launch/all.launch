@@ -38,4 +38,9 @@
           --shutdown-timeout 3"/>
 
 
+  <!-- CONTROLLERS -->
+
+  <rosparam command="load" file="$(find scara_52900)/config/controllers.yaml"/>          
+
+
 </launch>

@@ -1,0 +1,21 @@
+/gazebo_ros_control:
+  pid_gains:
+      waist:
+          p: 1000.0
+          i: 0.01
+          d: 10.0
+
+      shoulder:
+          p: 1000.0
+          i: 0.01
+          d: 10.0
+
+      elbow:
+          p: 1000.0
+          i: 0.01
+          d: 10.0  
+
+      wrist:
+          p: 1000.0
+          i: 0.01
+          d: 10.0                   
